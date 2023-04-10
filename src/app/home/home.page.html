@@ -9,15 +9,22 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-icon name="options-outline"></ion-icon>
-      <p>Filtrar</p>
+      <h6 class="resultados">{{bikesCount}} <span *ngIf="bikesCount != 1">resultados</span><span *ngIf="bikesCount == 1">resultado</span></h6>
+      <ion-buttons slot="end">
+        <ion-item lines="none">
+          <ion-icon name="options" size="small"></ion-icon>
+          <ion-text>
+            <h6 style="margin-left: 4px;">Filtrar</h6>
+          </ion-text>
+        </ion-item>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
   <ion-list lines="none">
     <ion-item *ngFor="let bike of bikes">
       <ion-card>
-        <img src="{{bike.image}}" />
+        <img src="{{bike.image}}"/>
         <ion-card-header>
           <ion-card-title>{{bike.price}}</ion-card-title>
           <ion-card-subtitle>{{bike.brand}}</ion-card-subtitle>

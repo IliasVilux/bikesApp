@@ -13,6 +13,7 @@ export class HomePage {
 
   apiURL = "https://apibikes.up.railway.app/apiBikes";
   bikes = <any>[];
+  bikesCount = 0;
 
   constructor() {}
 
@@ -23,5 +24,8 @@ export class HomePage {
   async getBikes(){
     const jsonBikes = await fetch(this.apiURL + "/motos");
     this.bikes = await jsonBikes.json();
+    this.bikes.forEach(() => {
+      this.bikesCount++;
+    });
   }
 }
