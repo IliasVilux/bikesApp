@@ -31,6 +31,15 @@
             <ion-select-option value="priceLow">Precio menor</ion-select-option>
           </ion-select>
         </ion-item>
+        <ion-item lines="full">
+          <ion-select label="Año"
+          placeholder="Selecciona un año"
+          (ionChange)="yearFilter($event)"
+          style="padding: 20px 0;">
+            <ion-select-option *ngFor="let year of years" value="{{year}}">{{year}}</ion-select-option>
+            <ion-select-option value="any">Todos los años</ion-select-option>
+          </ion-select>
+        </ion-item>
       </ion-list>
     </ion-content>
     <ion-footer>
