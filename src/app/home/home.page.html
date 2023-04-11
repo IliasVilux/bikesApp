@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
-  <ion-menu contentId="filter-menu" (ionWillClose)="getBikesFiltred()">
-    <ion-header collapse="condense">
+  <ion-menu contentId="filter-menu">
+    <ion-header collapse="condense" style="margin-bottom: 10px;">
       <ion-toolbar>
         <ion-title>Filtros</ion-title>
         <ion-menu-toggle slot="start">
@@ -10,18 +10,20 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item>
+        <ion-item lines="full">
           <ion-select label="Marca"
           placeholder="Selecciona una marca"
-          (ionChange)="brandFilter($event)">
+          (ionChange)="brandFilter($event)"
+          style="padding: 20px 0;">
             <ion-select-option *ngFor="let brand of brands" value="{{brand}}">{{brand}}</ion-select-option>
             <ion-select-option value="all">Todas</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item>
+        <ion-item lines="full">
           <ion-select label="Ordenar"
           placeholder="Selecciona una opción"
-          (ionChange)="orderFilter($event)">
+          (ionChange)="orderFilter($event)"
+          style="padding: 20px 0;">
             <ion-select-option value="relevance">Relevancia</ion-select-option>
             <ion-select-option value="new">Nuevo primero</ion-select-option>
             <ion-select-option value="old">Más antiguo primero</ion-select-option>
@@ -31,6 +33,12 @@
         </ion-item>
       </ion-list>
     </ion-content>
+    <ion-footer>
+      <ion-menu-toggle (click)="getBikesFiltred()">
+        <ion-button expand="block" shape="round" class="filterAply" id="loading-filters">Aplicar filtros</ion-button>
+      </ion-menu-toggle>
+      <ion-loading trigger="loading-filters" message="cargando..." duration="500" spinner="lines-sharp" translucent="true"></ion-loading>
+    </ion-footer>
   </ion-menu>
 
   <ion-header collapse="condense">

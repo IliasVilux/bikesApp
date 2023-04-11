@@ -45,3 +45,13 @@ ion-toolbar{
 ion-select::part(text) {
   opacity: .5;
 }
+
+ion-select::part(icon) {
+  display: none;
+}
+
+.filterAply{
+  width: 90%;
+  margin: auto;
+  margin-bottom: 20px;
+}
