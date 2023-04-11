@@ -27,6 +27,31 @@
 }
 
 .resultados{
-  padding-left: 16px;
   opacity: 0.5;
+}
+
+.addButton{
+  margin: 0 20px 20px 0;
+}
+
+ion-menu{
+  --width: 100vw;
+}
+
+ion-toolbar{
+  padding: 0 20px;
+}
+
+ion-select::part(text) {
+  opacity: .5;
+}
+
+ion-select::part(icon) {
+  display: none;
+}
+
+.filterAply{
+  width: 90%;
+  margin: auto;
+  margin-bottom: 20px;
 }
