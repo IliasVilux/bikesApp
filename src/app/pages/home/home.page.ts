@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
+import { IonicModule, NavController } from '@ionic/angular';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [IonicModule, NgIf, NgFor],
 })
 export class HomePage {
 
@@ -22,7 +22,7 @@ export class HomePage {
   filtredOrder = "relevance"
   filtredYear = "any"
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
 
   ngOnInit(){
     this.getBikes();
@@ -90,6 +90,9 @@ export class HomePage {
   }
   yearFilter(ev: any){
     this.filtredYear = ev.target.value;
-    console.log(this.filtredYear);
+  }
+
+  bikeDetail(bike: any){
+    this.navCtrl.navigateRoot(['detail', {data: JSON.stringify(bike)}]);
   }
 }

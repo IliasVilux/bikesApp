@@ -1,4 +1,7 @@
 <ion-content [fullscreen]="true">
+  <!-------------------------------------------------------------------->
+  <!-- MENU ------------------------------------------------------------>
+  <!-------------------------------------------------------------------->
   <ion-menu contentId="filter-menu">
     <ion-header collapse="condense" style="margin-bottom: 10px;">
       <ion-toolbar>
@@ -50,6 +53,9 @@
     </ion-footer>
   </ion-menu>
 
+  <!-------------------------------------------------------------------->
+  <!-- HEADER ---------------------------------------------------------->
+  <!-------------------------------------------------------------------->
   <ion-header collapse="condense">
     <ion-toolbar color="primary">
       <h6 class="resultados" slot="start">{{bikesCount}} <span *ngIf="bikesCount != 1">resultados</span><span *ngIf="bikesCount == 1">resultado</span></h6>
@@ -62,8 +68,11 @@
     </ion-toolbar>
   </ion-header>
 
+  <!-------------------------------------------------------------------->
+  <!-- LIST BIKES ------------------------------------------------------>
+  <!-------------------------------------------------------------------->
   <ion-list lines="none">
-    <ion-item *ngFor="let bike of bikes">
+    <ion-item *ngFor="let bike of bikes" (click)="bikeDetail(bike)">
       <ion-card>
         <img src="{{bike.image}}"/>
         <ion-card-header>
@@ -79,8 +88,8 @@
     </ion-item>
   </ion-list>
 
-  <ion-fab slot="absolute" vertical="bottom" horizontal="end" class="addButton">
-    <ion-fab-button>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button href="/newBike">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
