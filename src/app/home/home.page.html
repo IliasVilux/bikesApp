@@ -1,23 +1,47 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <h6 class="resultados">{{bikesCount}} <span *ngIf="bikesCount != 1">resultados</span><span *ngIf="bikesCount == 1">resultado</span></h6>
-      <ion-buttons slot="end">
-        <ion-item lines="none">
-          <ion-icon name="options" size="small"></ion-icon>
-          <ion-text>
-            <h6 style="margin-left: 4px;">Filtrar</h6>
-          </ion-text>
+  <ion-menu contentId="filter-menu" (ionWillClose)="getBikesFiltred()">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title>Filtros</ion-title>
+        <ion-menu-toggle slot="start">
+          <ion-icon name="arrow-back" color="primary" aria-label="Back"></ion-icon>
+        </ion-menu-toggle>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item>
+          <ion-select label="Marca"
+          placeholder="Selecciona una marca"
+          (ionChange)="brandFilter($event)">
+            <ion-select-option *ngFor="let brand of brands" value="{{brand}}">{{brand}}</ion-select-option>
+            <ion-select-option value="all">Todas</ion-select-option>
+          </ion-select>
         </ion-item>
-      </ion-buttons>
+        <ion-item>
+          <ion-select label="Ordenar"
+          placeholder="Selecciona una opción"
+          (ionChange)="orderFilter($event)">
+            <ion-select-option value="relevance">Relevancia</ion-select-option>
+            <ion-select-option value="new">Nuevo primero</ion-select-option>
+            <ion-select-option value="old">Más antiguo primero</ion-select-option>
+            <ion-select-option value="priceHigh">Precio mayor</ion-select-option>
+            <ion-select-option value="priceLow">Precio menor</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <h6 class="resultados" slot="start">{{bikesCount}} <span *ngIf="bikesCount != 1">resultados</span><span *ngIf="bikesCount == 1">resultado</span></h6>
+      <ion-menu-button color="light" slot="end" id="filter-menu">
+        <ion-icon name="options" size="small"></ion-icon>
+        <ion-text>
+          <h6 style="margin-left: 4px;">Filtrar</h6>
+        </ion-text>
+      </ion-menu-button>
     </ion-toolbar>
   </ion-header>
 
@@ -26,15 +50,21 @@
       <ion-card>
         <img src="{{bike.image}}"/>
         <ion-card-header>
-          <ion-card-title>{{bike.price}}</ion-card-title>
+          <ion-card-title>{{bike.model}}</ion-card-title>
           <ion-card-subtitle>{{bike.brand}}</ion-card-subtitle>
         </ion-card-header>
       
         <ion-card-content>
-          <h1>{{bike.model}}</h1>
+          <h1>{{bike.price}}€</h1>
           <p>{{bike.year}}</p>
         </ion-card-content>
       </ion-card>
     </ion-item>
   </ion-list>
+
+  <ion-fab slot="absolute" vertical="bottom" horizontal="end" class="addButton">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
