@@ -25,12 +25,11 @@ export class DetailPage implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.http.get(this.apiURL + "/moto/" + this.id).subscribe(res => {
+    this.http.get(`${this.apiURL}/moto/${this.id}`).subscribe(res => {
       for (const [key, value] of Object.entries(res)) {
         this.bike = value;
       }});
   }
-
 
   public alertButtons = [
     {
@@ -44,14 +43,14 @@ export class DetailPage implements OnInit {
   ];
 
   goBackHome(){
-    this.navCtrl.navigateBack('home');
+    this.navCtrl.navigateRoot('home');
   }
 
   async deleteResult(ev: any){
     if(ev.detail.role == "confirm"){
-      await fetch(this.apiURL + "/moto/" + this.bike.id);
+      this.http.delete(`${this.apiURL}/moto/${this.bike.id}`).subscribe();
+      this.goBackHome();
     }
-    this.goBackHome();
   }
 
 }

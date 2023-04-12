@@ -29,9 +29,13 @@ export class HomePage {
     this.getBikes();
   };
 
+  /* ionViewWillEnter(){
+    this.getBikes();
+  }; */
+
   async getBikes(){
     this.bikesCount = 0;
-    const jsonBikes = await fetch(this.apiURL + "/motos");
+    const jsonBikes = await fetch(`${this.apiURL}/motos`);
     this.bikes = await jsonBikes.json();
     this.bikes.forEach((bike: any) => {
       this.bikesCount++;
@@ -43,7 +47,7 @@ export class HomePage {
       }
       this.years.sort(function(a: number, b: number){return b-a});
     });
-  }
+  };
 
   async getBikesFiltred(){
     this.bikesCount = 0;
@@ -81,15 +85,15 @@ export class HomePage {
     this.bikes.forEach((bike: any) => {
       this.bikesCount++;
     });
-  }
+  };
 
   brandFilter(ev: any){
     this.filtredBrand = ev.target.value;
-  }
+  };
   orderFilter(ev: any){
     this.filtredOrder = ev.target.value;
-  }
+  };
   yearFilter(ev: any){
     this.filtredYear = ev.target.value;
-  }
+  };
 }
