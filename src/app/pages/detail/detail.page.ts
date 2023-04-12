@@ -13,19 +13,38 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailPage implements OnInit {
 
+  apiURL = "https://apibikes.up.railway.app/apiBikes";
   bike: any;
+  handlerMessage = '';
+  roleMessage = '';
 
   constructor(private navCtrl: NavController, private route: ActivatedRoute) {
     let tmpData = this.route.snapshot.params['data'];
     this.bike = JSON.parse(tmpData);
-    console.log(this.bike.brand);
   }
-
   ngOnInit() {
   }
 
+  public alertButtons = [
+    {
+      text: 'Cancelar',
+      role: 'cancel'
+    },
+    {
+      text: 'Eliminar',
+      role: 'confirm'
+    }
+  ];
+
   goBackHome(){
     this.navCtrl.navigateBack('home');
+  }
+
+  async deleteResult(ev: any){
+    if(ev.detail.role == "confirm"){
+      await fetch(this.apiURL + "/moto/" + this.bike.id);
+    }
+    this.goBackHome();
   }
 
 }
