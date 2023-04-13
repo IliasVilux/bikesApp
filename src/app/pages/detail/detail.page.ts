@@ -42,14 +42,14 @@ export class DetailPage implements OnInit {
     }
   ];
 
-  goBackHome(){
-    this.navCtrl.navigateRoot('home');
+  goBackHome(detailAction: boolean){
+    this.navCtrl.navigateBack(['home', {detailAction}]);
   }
 
   async deleteResult(ev: any){
     if(ev.detail.role == "confirm"){
       this.http.delete(`${this.apiURL}/moto/${this.bike.id}`).subscribe();
-      this.goBackHome();
+      this.goBackHome(true);
     }
   }
 

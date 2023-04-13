@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, LoadingController } from '@ionic/angular';
 import { NgFor, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule, NgIf, NgFor, RouterLink],
+  imports: [IonicModule, NgIf, NgFor, RouterLink, HttpClientModule],
 })
 export class HomePage {
 
@@ -23,29 +24,40 @@ export class HomePage {
   filtredOrder = "relevance"
   filtredYear = "any"
 
-  constructor() {}
+  detailAction: string | null | undefined;
 
-  ngOnInit(){
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private loadingCtrl: LoadingController) {}
+
+  ionViewDidEnter(){
+    this.detailAction = this.activatedRoute.snapshot.paramMap.get('detailAction');
     this.getBikes();
+    if(this.detailAction == 'true'){
+      this.showLoading();
+    }
   };
 
-  /* ionViewWillEnter(){
-    this.getBikes();
-  }; */
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      duration: 500,
+    });
 
-  async getBikes(){
+    loading.present();
+  }
+
+  getBikes(){
     this.bikesCount = 0;
-    const jsonBikes = await fetch(`${this.apiURL}/motos`);
-    this.bikes = await jsonBikes.json();
-    this.bikes.forEach((bike: any) => {
-      this.bikesCount++;
-      if(!this.brands.includes(bike.brand)){
-        this.brands.push(bike.brand);
-      }
-      if(!this.years.includes(bike.year)){
-        this.years.push(bike.year);
-      }
-      this.years.sort(function(a: number, b: number){return b-a});
+    this.http.get(`${this.apiURL}/motos`).subscribe(res => {
+      this.bikes = res;
+      this.bikes.forEach((bike: any) => {
+        this.bikesCount++;
+        if(!this.brands.includes(bike.brand)){
+          this.brands.push(bike.brand);
+        }
+        if(!this.years.includes(bike.year)){
+          this.years.push(bike.year);
+        }
+        this.years.sort(function(a: number, b: number){return b-a});
+      });
     });
   };
 
