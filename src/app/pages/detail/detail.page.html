@@ -1,0 +1,25 @@
+<ion-header collapse="condense" style="margin-bottom: 10px;">
+  <ion-toolbar>
+    <ion-title>Detalle</ion-title>
+      <ion-icon name="arrow-back" color="primary" style="margin-left: 20px;" (click)="goBackHome(false)"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <img alt="Silhouette of mountains" src="{{bike.image}}"/>
+  <ion-item lines="full" class="bikeHeader">
+    <ion-text>
+      <h1 class="bikeName">{{bike.brand}} {{bike.model}}</h1>
+      <h2 class="bikePrice">{{bike.price}}€</h2>
+    </ion-text>
+  </ion-item>
+</ion-content>
+<ion-footer>
+  <ion-alert
+    trigger="deleteBike"
+    header="Seguro que quieres eliminar {{bike.brand}} {{bike.model}} de la lista?"
+    [buttons]="alertButtons"
+    (didDismiss)="deleteResult($event)"
+  ></ion-alert>
+  <ion-button expand="block" shape="round" class="deleteBike" id="deleteBike" color="danger">Eliminar moto</ion-button>
+</ion-footer>
