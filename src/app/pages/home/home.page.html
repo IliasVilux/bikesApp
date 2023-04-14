@@ -2,7 +2,7 @@
   <!-------------------------------------------------------------------->
   <!-- MENU ------------------------------------------------------------>
   <!-------------------------------------------------------------------->
-  <ion-menu contentId="filter-menu">
+  <ion-menu contentId="filter-menu" slot="fixed">
     <ion-header collapse="condense" style="margin-bottom: 10px;">
       <ion-toolbar>
         <ion-title>Filtros</ion-title>
@@ -88,7 +88,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" [routerLink]="'/add'">
     <ion-fab-button href="/newBike">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
