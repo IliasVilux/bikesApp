@@ -14,7 +14,7 @@ imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, HttpClien
 export class AddPage implements OnInit {
 
 apiURL = "https://apibikes.up.railway.app/apiBikes";
-addBikeForm!: FormGroup;
+addBikeForm: FormGroup;
 
 constructor(private navCtrl: NavController, private http: HttpClient) { }
 
