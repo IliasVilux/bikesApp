@@ -2,7 +2,7 @@
   <!-------------------------------------------------------------------->
   <!-- MENU ------------------------------------------------------------>
   <!-------------------------------------------------------------------->
-  <ion-menu contentId="filter-menu" slot="fixed">
+  <ion-menu contentId="filter-menu" slot="fixed" *ngIf="bikesCount > 0">
     <ion-header collapse="condense" style="margin-bottom: 10px;">
       <ion-toolbar>
         <ion-title>Filtros</ion-title>
@@ -59,7 +59,7 @@
   <ion-header collapse="condense">
     <ion-toolbar color="primary">
       <h6 class="resultados" slot="start">{{bikesCount}} <span *ngIf="bikesCount != 1">resultados</span><span *ngIf="bikesCount == 1">resultado</span></h6>
-      <ion-menu-button color="light" slot="end" id="filter-menu">
+      <ion-menu-button color="light" slot="end" id="filter-menu" *ngIf="bikesCount > 0">
         <ion-icon name="options" size="small"></ion-icon>
         <ion-text>
           <h6 style="margin-left: 4px;">Filtrar</h6>
